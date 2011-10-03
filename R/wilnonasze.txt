@@ -1,0 +1,29 @@
+
+lt=read.table('C:/Documents and Settings/Justyna Z/Desktop/kursinis/lt.txt')
+ gndrlt=lt[,2]
+lhappy=lt[,3]
+lsftgov=lt[,4]
+lstfdem=lt[,5]
+lprl=lt[,6]
+llgl=lt[,7]
+lplt=lt[,8]
+lprt=lt[,9]
+lun=lt[,10]
+lep=lt[,11]
+sat=(lsftgov+lstfdem)/2
+lall=cbind(lprl,llgl,lplt,lprt,lun,lep)
+
+ cor(sat,lall)
+cor(sat,lhappy)
+
+all=cbind(sat,happy,lall)
+cor(all)
+
+mean(sat)
+mean(lhappy)
+mean(lprl)
+mean(llgl)
+mean(lplt)
+mean(lprt)
+mean(lun)
+mean(lep)
