@@ -1,0 +1,225 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[L7x]{fontenc}
+\usepackage[lithuanian]{babel}
+\usepackage{lmodern}
+
+\title{Europos Sąjungos valstybių skirtumai vertinant šalies politinę ir ekonominę situaciją}
+\date{Pradinė duomenų analizė}
+\author{Justyna Ziminskaja, Alina Lisovec \\ Darbo vadovas: prof. V. Čekanacičius}
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}
+
+\item  Duomenų suradimas ir apdorojimas
+
+\begin{itemize}
+\item Duomenis gavome iš http://ess.nsd.uib.no/ess/round4/
+\item Suradome Lietuvos, Estijos ir Švedijos duomenis, ir atsisiuntėme SPSS formatu. Atrinkome tokius kintamuosius: agea(respondentų amžius), dichotominis kintamasis - gender(lytis, kur 1-moteris, o 2-vyras) ir ranginius happy(laimingumas), stfgov(kiek respondentas yra patenkintas savo šalies vyriausybe), stfdem(kiek respondentas yra patenkintas demokratijos būsena šalyje), trstpr(pasitikėjimas šalies parlamentu), trstlgl(pasitikėjimas teisine sistema), trstplt(pasitikėjimas politikais), trst(pasitikėjimas partijomis), trstun(pasitikėjimas Jungtinėmis Tautomis), trstep(pasitikėjimas Europos Parlamentu).
+\newline Kintamieji stfgov ir stfdem matuojami 10 balų skale nuo 0 (itin nepatenkintas) iki 10 (itin patenkintas). Kintamieji trstprl, trstlgl, trstplt, trstprt, trstun matuojami 10 balų skale nuo 0 (itin nepasitikiu) iki 9 (itin pasitikiu). Kintamasis happy matuojamas 10 balų skale nuo 0 (itin nelaimingas) iki 9 (itin laimingas).
+
+\item Mus domina respondentai kurie yra 35 ir mažiau metų. Todėl atitinkamai atrenkame tokius respondentus.
+\item Nukopijuojame duomenys į txt failą.
+
+\item Mūsų pagrindinis kintamasis t.y. satisfaction yra vidurkis dviejų kintamųjų stfgov ir stfdem
+
+\end{itemize}
+
+\item Lietuvos duomenų analizė
+
+\begin{itemize}
+\item Nuskaitome duomenys su R programa: 
+\newline
+\textit {lt=read.table('C:/Documents and Settings/Justyna Z/Desktop/kursinis/lt.txt')}
+\ Išskiriame kiekvieną kintamąjį:
+\newline
+\textit {>gndrlt=lt[,2] 
+\newline >lhappy=lt[,3] 
+\newline >lsftgov=lt[,4]
+\newline >lstfdem=lt[,5]
+\newline >lprl=lt[,6]
+\newline >llgl=lt[,7]
+\newline >lplt=lt[,8]
+\newline >lprt=lt[,9]
+\newline >lun=lt[,10]
+\newline >lep=lt[,11]}
+
+\item Sukuriame pagrindinį kintamajį satisfaction:
+\newline 
+\textit{sat=(lsftgov+lstfdem)/2}
+\item Sukuriame matricą visų pasitikėjimo kintamųjų:
+\newline \textit {lall=cbind(lprl,llgl,lplt,lprt,lun,lep)}
+\item Apskaičiuojame koreliaciją tarp mūsų pagrindinio kintamojo \textit{sat} ir kitų kintamųjų:
+\newline  \textit{cor(sat,lall)}  -  atitinkamai sat su lprl koreliacijos koeficientas lygus 0,6258285,  su  llgl -  0,531893, su lplt - 0,5809648, su lprt - 0,5627991, su lun - 0,1621104, su lep - 0,2464673
+\newline Koreliacija satisfaction ir  lhappy yra 0,279422, tai padrėme su komanda 
+\newline \textit{cor(sat, lhappy)}
+\item Matome, kad satisfaction gana reikšmingai koreliuoja su visais kintamaisiais.
+
+\item Apskaičiuuojame vidurkius visų kintamųjų
+\newline \textit{ >mean(sat) 
+ \newline [1] 2.969589  }
+\newline \textit{ >mean(lhappy) 
+ \newline [1] 6.855098  }
+\newline Lietuviai yra nelamingiausi iš mūsų pasirinktų šalių.
+\newline \textit{ >mean(lprl) 
+ \newline [1] 2.31127  }
+\newline Labai mažas mūsų šalies gyventojų pasitikėjimas parlamentu.
+\newline \textit{ >mean(llgl) 
+ \newline [1] 3.420394  }
+\newline Silpnas pasitikėjimas teisine sistema.
+\newline \textit{ >mean(lplt) 
+ \newline [1] 2.064401  }
+\newline Mes beveik nepasitikime Lietuvos politikais ir jų partijomis .
+\newline \textit{ >mean(lprt)  
+ \newline [1] 2.014311  }
+\newline Labiausiai iš patikrintų kintamųjų pasitikime Juntinėmis Tautomis.
+\newline \textit{ >mean(lun) 
+ \newline [1] 5.389982  }
+\newline \textit{ >mean(lep) 
+ \newline [1] 5.030411  }
+\newline Pasitikėjimas Europos Parlamentu beveik 3 vienetais aukštesnis už pasitikėjimą Lietuvos Parlamentu.
+
+% cia nzn ka pakomentuoti del vidurkiu :D 
+
+
+
+\end{itemize}
+
+\item Estijos Duomenų analizė
+
+\begin{itemize}
+\item Nuskaitome duomenys su R programa: 
+\newline
+\textit {EST=read.table('C:/Users/AlinaLisovec/Desktop/kursinis/EST.txt')}
+\ Išskiriame kiekvieną kintamąjį:
+\newline
+\textit {>gndrEST=EST[,2] 
+\newline >Ehappy=EST[,3] 
+\newline >Esftgov=EST[,4]
+\newline >Estfdem=EST[,5]
+\newline >Eprl=EST[,6]
+\newline >Elgl=EST[,7]
+\newline >Eplt=EST[,8]
+\newline >Eprt=EST[,9]
+\newline >Elun=EST[,10]
+\newline >Eep=EST[,11]}
+
+\item Sukuriame pagrindinį kintamajį satisfaction:
+\newline 
+\textit{satE=(Esftgov+Estfdem)/2}
+\item Sukuriame matricą visų pasitikėjimo kintamųjų:
+\newline \textit {Eall=cbind(Eprl,Elgl,Eplt,Eprt,Elun,Eep)}
+\item Apskaičiuojame koreliaciją tarp mūsų pagrindinio kintamojo \textit{sat} ir kitų kintamųjų:
+\newline  \textit{cor(satE,Eall)}  -  atitinkamai satE su Eprl koreliacijos koeficientas lygus 0,6093185,  su  Elgl -  0.5222899,  Eplt - 0.5945684, Eprt - 0.5681525, Elun - 0.3106301, Eep - 0.3717045
+\newline Koreliacija satisfaction ir  Ehappy yra 0.3434351, tai padrėme su komanda 
+\newline \textit{cor(Ehappy, satE)}
+\item Matome, kad satisfaction gana reikšmingai koreliuoja su visais kintamaisiais.
+
+\item Apskaičiuuojame vidurkius visų kintamųjų
+\newline \textit{ >mean(satE) 
+ \newline [1] 4.846817  }
+\newline \textit{ >mean(Ehappy) 
+ \newline [1] 7.200935  }
+\newline Matome, kad gyventojai yra pakankamai laimingi gyvendami Estijoje.
+\newline \textit{ >mean(Eprl) 
+ \newline [1] 4.163551  }
+ \newline Vidurkis artimas 4, kas reiškia, kad žmonės labiau linkę nepasitikėti šalies parlamentu.
+\newline \textit{ >mean(Elgl) 
+ \newline [1] 5.179907  }
+\newline  Estijos gyventojai pasitiki savo šalies teisine sistema skirtingai nuo Lietuvos respondentų.
+\newline \textit{ >mean(Eplt) 
+ \newline [1] 3.478972  }
+\newline Pasitikėjimas politikais yra žemiausias iš patikrintu kintamųjų, todėl politikai turėtų sunerimti dėl savo rinkėjų nepasitikėjimo.
+\newline \textit{ >mean(Eprt) 
+ \newline [1] 3.581776  }
+\newline Kadangi, žmonės nepasitiki politikais, tai suprantama, kad pasitikejimas partijomis nelabai skiriasi nuo Eplt vidurkio.
+\newline \textit{ >mean(Elun) 
+ \newline [1] 5.563084  }
+\newline Matome, kad Jungtinemis tautomis, Estijos gyventojai labiau linkę pasitikėti, nei ne.
+\newline \textit{ >mean(Eep) 
+ \newline [1] 5.245327 }
+\newline Pasitikėjimas Europos Parlamentu yra palyginus aukštesnis už pasitikėjimą šalies parlamentu (Eprl).
+
+
+% cia nzn ka pakomentuoti del vidurkiu :D 
+
+
+
+\end{itemize}
+
+\item Švedijos duomenų analizė
+
+\begin{itemize}
+\item Nuskaitome duomenys su R programa: 
+\newline
+\textit {SW=read.table('C:/Users/AlinaLisovec/Desktop/kursinis/SW.txt')}
+\ Išskiriame kiekvieną kintamąjį:
+\newline
+\textit {>gndrSW=SW[,2] 
+\newline >SWhappy=SW[,3] 
+\newline >SWsftgov=SW[,4]
+\newline >SWstfdem=SW[,5]
+\newline >SWprl=SW[,6]
+\newline >SWlgl=SW[,7]
+\newline >SWplt=SW[,8]
+\newline >SWprt=SW[,9]
+\newline >SWun=SW[,10]
+\newline >SWep=SW[,11]}
+
+\item Sukuriame pagrindinį kintamajį satisfaction:
+\newline 
+\textit{satSW=(SWsftgov+SWstfdem)/2}
+\item Sukuriame matricą visų pasitikėjimo kintamųjų:
+\newline \textit {SWall=cbind(SWprl,SWlgl,SWplt,SWprt,SWun,SWep)}
+\item Apskaičiuojame koreliaciją tarp mūsų pagrindinio kintamojo \textit{sat} ir kitų kintamųjų:
+\newline  \textit{cor(satE,Eall)}  -  atitinkamai satSW su SWprl koreliacijos koeficientas lygus 0.5948863,  su  SWlgl - 0.3544969,  SWplt - 0.520888, SWprt - 0.4610149, SWun - 0.3116339, SWep - 0.2566468
+\newline Koreliacija satisfaction ir  SWhappy yra 0.2249195, tai padrėme su komanda 
+\newline \textit{cor(SWhappy, satSW)}
+\item Matome, kad satisfaction gana reikšmingai koreliuoja su visais kintamaisiais.
+
+\item Apskaičiuojame vidurkius visų kintamųjų
+\newline \textit{ >mean(satSW) 
+ \newline [1] 5.9677  }
+\newline \textit{ >mean(SWhappy) 
+ \newline [1] 7.792017  }
+\newline Švedijos gyventojai, kaip ir Estijos yra laimingi gyvendami savo šalyje.
+\newline \textit{ >mean(SWprl) 
+ \newline [1] 5.87395  }
+\newline Kaip matote, parlamentu pasitikėjimas yra irgi palyginus aukštas.
+\newline \textit{ >mean(SWlgl) 
+ \newline [1] 6.210084  }
+\newline Švedijos piliečiai pasitiki savo teisine sistema.
+\newline \textit{ >mean(SWplt) 
+ \newline [1] 4.821429  }
+\newline Švedijos respondentai linkę pasitikėti kaip politikais, taip ir jų patijomis.
+\newline \textit{ >mean(SWprt) 
+ \newline [1] 4.97479  }
+\newline \textit{ >mean(SWlun) 
+ \newline [1] 6.796218  }
+\newline Aukštas pasitikejimas Jungtinėmis Tautomis.
+\newline \textit{ >mean(SWep) 
+ \newline [1] 5.386555 }
+\newline Skirtingai nuo Estijos, pasitikėjimas Europos Parlamentu yra šiek tiek žemesnis uz pasitikėjimą šalies parlamentu.
+
+
+
+
+\end{itemize}
+ \item Išvados:
+\begin{itemize}
+\item Apskaičiavę vidurkius visų valstybių, visų kintamųjų galime pasakyti:
+\newline  Švedai yra laimingiausi bei labiausiai pasitiki savo šalies parlamentu, politikais, t.t. Lietuvos respondentai yra mažiausiai laimingi ir mažiausiai pasitki politikais, bei institucijomis. Estijos gyventojai  kaikuriais aspektais yra panšūs į lietuvius.
+\item Sužinoję koreliacijas tarp pagrindinio kintamojo(\textit{sat}) ir kitų kintamųjų, galime padaryti išvadą, kad \textit{satisfaction} tikrai priklauso nuo tų kintamųjų, kuriuos pasirinkome. Bet ar tikrai nuo visų, tai išsiaiškinsime darydami tolesnę analizę. 
+\item Galiausiai galime nuspręsti, kad darysime regresinį modelį atžvilgiu kintamojo sat. Bet dar pastebime, kad turėsime patikrinti multikolinearumą, nes pvz. Lietuvos atveju \textit{lprt} ir \textit{lplt} koreliuoja tarpusavy stipriai, t.y 0.8968103. Todėl turėsime patikrinti ar gauti koeficientai prie kintamųjų yra teisingi.
+
+\end{itemize}
+
+\end{enumerate}
+
+\showhyphens{Nebeprisikiškiakopūsteliaudavome}
+
+
+\end{document}
