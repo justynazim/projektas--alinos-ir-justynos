@@ -1,0 +1,167 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english,lithuanian]{babel}
+\usepackage[L7x]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumerate}
+%\usepackage{array}
+\textwidth = 425pt
+\newcommand{\newln}{\\&\quad\quad{}}
+\usepackage{amsmath}
+
+
+\topmargin=0cm
+\textheight=700pt
+\textwidth=430pt
+\oddsidemargin=0pt
+\headsep=0pt
+\headheight=0pt
+
+\begin{document}
+
+\title{Atsitiktiniai procesai}
+\date{}
+\author{}
+\maketitle
+\begin{enumerate}
+   \item (2 taškai) Tegu $\{X_t,   t\ge0\}$ atsitiktinis procesas su nepriklausomais stacionariais prieaugiais ir $X(0)=0$. Įrodykite, kad $EX_t=\mu_{1}t$, čia $\mu=EX_t$.
+\smallskip \\
+Kadangi atsitiktinis procesas $\{X_t,   t\ge0\}$ turi stacionarius prieaugius, tai atsitiktiniai dydžiai $X_{t+h}-X_{s+h}$ ir $X_{t}-X_{s}$ yra vienodai pasiskirstę su visais $s<t \in T$ ir tokiais $h>0$, kad $t+h,s+h \in T$. Taigi, gauname, kad atsitiktiniai dydžiai $X_1-X_0$, $X_2-X_1$, ... , $X_t-X_{t-1}$ yra vienodai pasiskirstę, todėl čia atsitiktinių dydžių pasiskirstymo funkcijos sutampa, o taip pat sutampa ir empiriniai vidurkiai. \\
+Tarkime $EX_1=\mu_1$, tada \\
+$E(X_1-X_0)=\mu_1$,  nes $EX_0=0,$ tada ir \\
+$E(X_2-X_1)=\mu_1$,\\ 
+tai reiškia, kad $E(X_2-X_1)=EX_2-EX_1= \mu_1,$ kadangi $EX_1=\mu_1,$ todėl $EX_2=2\mu_1$\\
+...\\
+$E(X_t-X_{t-1})=t\mu_1-(t-1)\mu_1=\mu_1$, iš viso tokių empirinių vidurkių lygių $\mu_1$ turėsime t, todėl $EX_t=t\mu_1$.
+
+
+
+   \item (2 taškai)  Tegu $\{X_t, t\ge0\}$ atsitiktinis procesas su nepriklausomais stacionariais prieaugiais ir $X(0)=0$. Įrodykite, kad
+\begin{enumerate}
+\item $var(X_t)=\sigma_1^2t$;
+\end{enumerate}
+čia $\sigma_1^2=var(X_1)$.\\
+\smallskip\\
+Kadangi atsitiktiniai dydžiai $X_1-X_0$, $X_2-X_1$, ... , $X_t-X_{t-1}$ yra vienodai pasiskirstę, todėl čia atsitiktinių dydžių pasiskirstymo funkcijos sutampa, o taip pat sutampa ir empiriniai vidurkiai ir dispersijos. \\
+Tarkime $VarX_1=\sigma_1^2$, tada \\
+$Var(X_1-X_0)=\sigma_1^2$, nes $X_0=0$, todėl kai pridėsime arba atimsime $X_0$ nieko nepasikeis\\
+$Var(X_2)=Var(X_2-X_0)=Var(X_2-X_1+X_1-X_0)=Var(X_2-X_1)+Var(X_1-X_0)$\\
+Žinome, kad $Var(X_1-X_0)=Var(X_2-X_1)=Var(X_t-X_{t-1})=\sigma_1^2$, todėl\\
+$Var(X_2-X_1)+Var(X_1-X_0)=\sigma_1^2+\sigma_1^2=2\sigma_1^2$\\
+Analogiškai ir su $X_t$ \\
+$ Var(X_t)= Var(X_t-X_{t-1}+X_{t-1}-...-X_1+X_1-X_0)=Var(X_t-X_{t-1})+...+Var(X_1-X_0)=t\sigma_1^2$
+
+(b) $var(X_t - X_s)=\sigma_1^2(t - s)$,\\
+\smallskip\\
+Iš $(a)$ dalies gauname, kad $Var(X_t)=t\sigma_1^2$ ir $Var(X_s)=s\sigma_1^2$. Tada, naudojantis tuo, kad prieaugiai yra nepriklausomi gauname, jog  $Var(X_3-X_1)=Var(X_3-X_2+X_2-X_1)=Var(X_3-X_2)+Var(X_2-X_1)=\sigma_1^2+\sigma_1^2=2\sigma_1^2$\\
+...\\
+$Var(X_t-X_s)=Var(X_t-X_{t-1}+...+X_{s+1}-X_s)=Var(X_t-X_{t-1})+...+Var(X_{s+1}-X_s))=\sigma_1^2+...+\sigma_1^2=\sigma_1^2(t-s)$, nes tokių sumų bus t-s.
+
+
+\item (2 taškai)  Įrodykite, kad atsitiktinis procesas yra tolydus kvadratinio vidurkio prasme tada ir tik tada, jei jo autokoreliacijos funkcija $Q_X(t,s)$ yra tolydi.\\
+\smallskip \\
+Atsitiktinis procesas yra tolydus kvadratinio vidurkio prasme, kai 
+\begin{equation}
+\lim_{h \to 0}E|X_{t+h}-X_t|^2=0,
+\end{equation}
+tada ir tik tada kai autokoreliacijos funkcija $Q_X(t,s)=EX_t X_s$ yra tolydi.\\
+Funkcija yra tolydi, kai ji yra tolydi ir pagal pirmą ir pagal antrą kintamąjį, taigi turime 
+\begin{equation}
+\lim_{h \to 0}EX_{t+h}X_{s+h}=EX_t X_s,
+\end{equation}
+(1) " =>"
+\smallskip \\ Tarkim atsitiktinis procesas yra tolydus kvadratinio vidurkio prasme.\\
+ $E|X_{t+h}-X_t|^2=E(X_{t+h}-X_t)^2=E(X_{t+h}^2-2X_{t+h}X_t+X_t^2)= EX_{t+h}^2-2EX_{t+h}X_t+EX_t^2   $
+\begin{equation}
+ \begin{split}
+\lim_{h \to 0}E|X_{t+h}-&X_t|^2=\lim_{h \to 0}EX_{t+h}^2 -2\lim_{h \to 0}EX_{t+h}X_t +\lim_{h \to 0}EX_t^2 \newln =
+\lim_{h \to 0}EX_{t+h}^2 -2\lim_{h \to 0}EX_{t+h}X_t +EX_t^2=0 
+\end{split}
+\end{equation}
+O iš to, kad riba egzistuoja ir yra lygi 0, išplaukia, kad taip bus tik tada, kai
+\begin{equation}
+\lim_{h \to 0}EX_{t+h}^2 -2\lim_{h \to 0}EX_{t+h}X_t +EX_t^2=EX_t^2-2EX_t^2+EX_t^2=0
+\end{equation}
+taigi gauname, kad $\lim_{h \to 0}EX_{t+h}X_{t+h}=EX_tX_t$, o tai reiškia, kad  $Q_X(t,s)$ yra tolydi ir pagal pirmą ir pagal antrą kintamąjį. Ką ir reikėjo įrodyti.\\
+\smallskip \\
+(2) " <="
+\smallskip \\  Tarkim autokoreliacijos funkcija yra tolydi.\\
+$\lim_{h \to 0}EX_{t+h}X_{s+h}=EX_t X_s$ ir $EX_t^2<\infty$. Tada \\
+\begin{equation}
+\begin{split}
+\lim_{h \to 0}[EX_{t+h}^2-2EX_{t+h}X_t+&EX_t^2 ]=
+\lim_{h \to 0}EX_{t+h}^2 -2\lim_{h \to 0}EX_{t+h}X_t +EX_t^2 \newln =EX_t^2-2EX_t^2+EX_t^2=0
+\end{split}
+\end{equation}
+Galėjome ribos ženklą įkelti prieš kiekvieną narį, nes žinome, iš autokoreliacijos funkcijos tolydumo, kad kiekvieno nario  riba egzistuos.
+
+
+
+\item (1 taškas)  Įrodykite, kad silpnai stacionarus procesas yra tolydus kvadratinio vidurkio prasme, jei proceso vidutinė galia $R_X(t):=Q_X(t,t)$ yra tolydi taške 0.\\
+\smallskip \\
+Tarkim procesas yra silpnai stacionarus,t.y $EX_s=EX_t$ ir kovariacinė f-ja $\Gamma(t,t+h)=\Gamma(0,h)$, tarkim proceso vidutinė galia $R_{X}(t)=Q_X(t,t)$ yra tolydi taške (0,0), t.y $R_{X}(t)=Q_X(t,t)=EX_tX_t$ ir kai t->0, tai $EX_tX_t=EX_0X_0$. Ar procesas bus tolydus kvadratinio vidurkio prasme $ \lim_{h \to 0}E|X_{t+h}-X_t|^2=0$? \\
+\smallskip \\
+$\Gamma(t,t+h)=E((X_t -EX_t)(X_{t+h}-EX_{t+h}))$\\
+
+\begin{equation}
+\lim_{h \to 0}E(X_{t+h}-X_t)^2,
+\end{equation} tarkim s=t+h , be to  $EX_s=EX_t$, tada\\ 
+$E(X_s-X_t)^2=E(X_s-EX_s-X_t+EX_t)^2=E(X_s-EX_s-(X_t-EX_t))^2=E(X_s-EX_s)^2- 2E(X_s-EX_s)(X_t-EX_t)+E(X_t-EX_t)^2=\Gamma(s,s)-2\Gamma(s,t)+\Gamma(t,t)$
+\smallskip\\
+Kadangi  $\Gamma(s,s)=\Gamma(0,0)=\Gamma(t,t)$ ir $\Gamma(t,t+h)=\Gamma(0,h)$, nes silpnai stacionarus procesas ir prisimenam, kad s=t+h, gaunam \\
+$\Gamma(s,s)-2\Gamma(s,t)+\Gamma(t,t)=2\Gamma(0,0)-2\Gamma(t+h,t)=2\Gamma(0,0)-2\Gamma(h,0)$
+\smallskip \\
+$\Gamma(h,0)=E((X_h -EX_h)(X_0-EX_0))=EX_hX_0-EX_hEX_0-EX_hEX_0+EX_hEX_0$\\
+\smallskip \\
+Kadangi  $EX_0=EX_h$ ir $\lim_{h \to 0} EX_hEX_0=EX_0X_0$\\
+$\lim_{h \to 0} [EX_hX_0-EX_hEX_0-EX_hEX_0+EX_hEX_0]=EX_0X_0-EX_0EX_0-EX_0EX_0+EX_0EX_0=\Gamma(0,0)$\\
+Todėl 
+\begin{equation}
+\lim_{h \to 0}E(X_{t+h}-X_t)^2=\lim_{h \to 0}(2\Gamma(0,0)-2\Gamma(h,0))=2\Gamma(0,0)-2\Gamma(0,0)=0
+\end{equation}
+
+
+
+\item (1 taškas)  Įrodykite, kad tolydus kvadratinio vidurkio prasme procesas yra tolydus 1-ojo momento prasme.\\
+\smallskip \\
+Tolydus kvadratinio vidurkio prasme procesas
+\begin{equation}
+\lim_{h \to 0}E|X_{t+h}-X_t|^2=0.
+\end{equation}
+Tolydus 1-ojo momento prasme 
+\begin{equation}
+\lim_{h \to 0}E|X_{t+h}-X_t|=0.
+\end{equation}
+Jenseno nelygybė sako, kad $(EX)^2 \leq E X^2$, todėl
+\begin{equation}
+\lim_{h \to 0}E(X_{t+h}-X_t)^2 \geq \lim_{h \to 0}(E(X_{t+h}-X_t))^2
+\end{equation}
+O kadangi pakelta kvadratu, tai vidurkis (atitinkamai ir riba) gali būti ne neigiama, todėl ir 
+$\lim_{h \to 0}(E(X_{t+h}-X_t))^2=0$ 
+\begin{equation}
+\lim_{h \to 0}\sqrt {E(X_{t+h}-X_t)^2}= \lim_{h \to 0}|E(X_{t+h}-X_t)|
+\end{equation}
+O kadangi $(E(X_{t+h}-X_t))^2=(E(X_{t}-X_{t+h}))^2$, tai \\
+$ \lim_{h \to 0}|E(X_{t+h}-X_t)| = \lim_{h \to 0}|E(X_{t}-X_{t+h})|=0$
+\smallskip \\ Išnagrinėkime 2 atvejus: \\
+1)$ E(X_{t+h}-X_t) \geq 0$, tada
+\begin{equation}
+\lim_{h \to 0}E(X_{t+h}-X_t)=0
+\end{equation}
+2) $ E(X_{t+h}-X_t) \leq 0$, tada
+\begin{equation}
+\lim_{h \to 0}E(X_{t}-X_{t+h})=0
+\end{equation}
+Iš to išplaukia, kad $\lim_{h \to 0}E|X_{t+h}-X_t|=0.$
+
+
+
+
+\item (2 taškai) Įrodykite, kad Vynerio procesas yra tolydus kvadratinio vidurkio prasme.\\
+\smallskip \\
+pa,
+\end{enumerate}
+\end{document}
